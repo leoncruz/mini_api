@@ -1,0 +1,21 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-minitest
+
+AllCops:
+  TargetRubyVersion: 3.0
+
+  Exclude:
+    - 'bin/*'
+    - 'tmp/*'
+    - 'test/test_helper.rb'
+    - 'test/dummy/config/**/*.rb'
+    - 'test/dummy/bin/**/'
+    - 'test/dummy/db/**/*.rb'
+    - 'test/dummy/tmp/*'
+
+  NewCops: enable
+
+Metrics:
+  Enabled: false

@@ -1,0 +1,29 @@
+name: "The Koala Social - Api"
+
+on: [push]
+
+jobs:
+  tests:
+    name: Tests with Ruby v${{ matrix.ruby }}
+    runs-on: "ubuntu-latest"
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgresql://postgres:root@localhost:5432/the_koala_social_test
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["3.0.4"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Running tests
+        run: ./bin/test
