@@ -9,7 +9,6 @@ jobs:
 
     env:
       RAILS_ENV: test
-      DATABASE_URL: postgresql://postgres:root@localhost:5432/the_koala_social_test
 
     strategy:
       fail-fast: false
