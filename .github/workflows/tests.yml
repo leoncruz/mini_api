@@ -1,4 +1,4 @@
-name: "The Koala Social - Api"
+name: "Tests"
 
 on: [push]
 
