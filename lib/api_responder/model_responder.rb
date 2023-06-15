@@ -11,7 +11,7 @@ module ApiResponder
 
     def respond
       body = {
-        success: true,
+        success: resource_has_errors? == false,
         message: @options[:message] || default_message
       }
 

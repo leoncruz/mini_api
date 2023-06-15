@@ -13,12 +13,14 @@ class FailureOperationsTest < ModelResponderTest
     }
 
     assert_equal response.parsed_body['errors'], errors
+    assert_not response.parsed_body['success']
   end
 
   test 'should return unprocessable entity status when custom status not informed' do
     post '/dummy', params: { first_name: '', last_name: '' }
 
     assert_response :unprocessable_entity
+    assert_not response.parsed_body['success']
   end
 
   test 'should return custom status when informed' do
@@ -41,12 +43,14 @@ class FailureOperationsTest < ModelResponderTest
     post '/create_with_default_status', params: { first_name: '', last_name: '' }
 
     assert_response :bad_request
+    assert_not response.parsed_body['success']
   end
 
   test 'should return a default message when not informed' do
     post '/dummy', params: { first_name: '', last_name: '' }
 
     assert_equal 'DummyRecord could not be created.', response.parsed_body['message']
+    assert_not response.parsed_body['success']
   end
 
   test 'should return custom message when informed' do
@@ -69,5 +73,7 @@ class FailureOperationsTest < ModelResponderTest
     post '/create_with_custom_message', params: { first_name: '', last_name: '' }
 
     assert_equal 'Custom message error', response.parsed_body['message']
+
+    assert_not response.parsed_body['success']
   end
 end
