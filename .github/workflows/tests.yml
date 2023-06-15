@@ -25,6 +25,9 @@ jobs:
           bundler-cache: true
 
       - name: Running tests
+        uses: paambaati/codeclimate-action@v4.0.0
         env:
           CC_TEST_REPORTER_ID: 747d63fc771e9c7bade64cce52fce297415adad9904a7523691ed934201723aa
-        run: ./bin/test
+        with:
+          debug: true
+          coverageCommand: bin/test
