@@ -15,7 +15,7 @@ class SuccessOperationsTest < ModelResponderTest
 
     assert_response :created
 
-    assert_equal 'DummyRecord was successfully created.', response.parsed_body['message']
+    assert_equal 'Dummy Record Translated was successfully created.', response.parsed_body['message']
   end
 
   test 'should return status code 200 and default message when record was updated' do
@@ -37,7 +37,7 @@ class SuccessOperationsTest < ModelResponderTest
 
     assert_response :ok
 
-    assert_equal 'DummyRecord was successfully updated.', response.parsed_body['message']
+    assert_equal 'Dummy Record Translated was successfully updated.', response.parsed_body['message']
   end
 
   test 'should return empty body and 204 status code' do

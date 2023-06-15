@@ -49,7 +49,7 @@ class FailureOperationsTest < ModelResponderTest
   test 'should return a default message when not informed' do
     post '/dummy', params: { first_name: '', last_name: '' }
 
-    assert_equal 'DummyRecord could not be created.', response.parsed_body['message']
+    assert_equal 'Dummy Record Translated could not be created.', response.parsed_body['message']
     assert_not response.parsed_body['success']
   end
 

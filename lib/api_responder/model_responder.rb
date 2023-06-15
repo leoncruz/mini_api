@@ -46,21 +46,10 @@ module ApiResponder
     def default_message
       kind = resource_has_errors? ? 'alert' : 'notice'
 
-      klass = @controller.controller_name.classify.safe_constantize
-
-      resource_name =
-        if klass.class.in?([ActiveRecord::Base, ActiveModel::Model])
-          klass.model_name.human
-        elsif klass.is_a?(NilClass)
-          'resource'
-        else
-          klass
-        end
-
       I18n.t(
         kind,
         scope: [:api_responder, :messages, :actions, @controller.action_name],
-        resource_name: resource_name,
+        resource_name: @resource.class.model_name.human,
         default: ''
       )
     end
