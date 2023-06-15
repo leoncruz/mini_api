@@ -1,3 +1,4 @@
+![](https://github.com/leoncruz/api-responder/actions/workflows/tests.yml/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ec2939be693459b7ce4d/maintainability)](https://codeclimate.com/github/leoncruz/api-responder/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ec2939be693459b7ce4d/test_coverage)](https://codeclimate.com/github/leoncruz/api-responder/test_coverage)
 
