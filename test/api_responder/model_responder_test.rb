@@ -2,11 +2,6 @@
 
 require 'test_helper'
 
-class DummyRecord < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-end
-
 class DummyModel
   include ActiveModel::Model
 end

@@ -21,3 +21,8 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.file_fixture_path = ActiveSupport::TestCase.fixture_path + "/files"
   ActiveSupport::TestCase.fixtures :all
 end
+
+class DummyRecord < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+end
