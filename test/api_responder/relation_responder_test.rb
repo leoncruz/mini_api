@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class DummyRecordsController < ActionController::Base # rubocop:disable Rails/ApplicationController
+class DummyRecordsController < ActionController::Base
   include ApiResponder
 
   def index

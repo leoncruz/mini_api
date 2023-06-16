@@ -24,7 +24,7 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.fixtures :all
 end
 
-class DummyRecord < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
+class DummyRecord < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
 end

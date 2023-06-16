@@ -6,7 +6,7 @@ class DummyModel
   include ActiveModel::Model
 end
 
-class DummyRecordsController < ActionController::Base # rubocop:disable Rails/ApplicationController
+class DummyRecordsController < ActionController::Base
   include ApiResponder
 
   def create
