@@ -10,11 +10,11 @@ gem 'puma'
 
 gem 'sqlite3'
 
-group :development, :test do
-  gem 'debug', '>= 1.0.0'
-  gem 'rubocop'
-  gem 'rubocop-minitest'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
-  gem 'simplecov'
-end
+gem 'debug', '>= 1.0.0'
+gem 'rubocop'
+gem 'rubocop-minitest'
+gem 'rubocop-performance'
+gem 'rubocop-rails'
+gem 'simplecov'
+
+gem 'kaminari'
