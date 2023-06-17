@@ -17,3 +17,5 @@ gem 'rubocop-performance'
 gem 'simplecov'
 
 gem 'kaminari'
+
+gem 'active_model_serializers', '~> 0.10.0'
