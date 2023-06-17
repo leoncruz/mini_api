@@ -11,6 +11,7 @@ A gem to standardize json responses in Rails applications, highly inspired on [R
   - [Success and failure actions](#success-and-failure-actions)
 - [Overriding response](#overriding-response)
 - [Pagination](#pagination)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
@@ -168,6 +169,14 @@ if no page is informed, by default will use page `1`
 Default value of `per_page` is `25`. Only specific values are permitted to `per_page`, they are: 10, 25, 50, 100
 
 If the value it is none of those, so the default value is used
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
