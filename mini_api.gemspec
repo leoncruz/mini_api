@@ -10,11 +10,12 @@ Gem::Specification.new do |spec|
   spec.summary     = 'A collection of resources to create restful apis'
   spec.description = 'A collection of resources to create restful apis'
   spec.license     = 'MIT'
-  s.metadata = {
+  spec.metadata = {
     'homepage_uri' => 'https://github.com/leoncruz/mini_api',
     'documentation_uri' => 'https://www.rubydoc.info/gems/mini_api/',
     'source_code_uri' => 'https://github.com/leoncruz/mini_api',
-    'bug_tracker_uri' => 'https://github.com/leoncruz/mini_api/issues'
+    'bug_tracker_uri' => 'https://github.com/leoncruz/mini_api/issues',
+    'rubygems_mfa_required' => 'true'
   }
 
   spec.required_ruby_version = '~> 3.0'
@@ -26,5 +27,4 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency 'rails', '>= 7.0.5'
-  spec.metadata['rubygems_mfa_required'] = 'true'
 end
