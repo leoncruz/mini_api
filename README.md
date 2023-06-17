@@ -26,7 +26,7 @@ And then execute:
 $ bundle
 ```
 
-Your must install [Kaminari](https://github.com/kaminari/kaminari) to handle pagination
+You must install [Kaminari](https://github.com/kaminari/kaminari) to handle pagination
 and [Active Model Serializers](http://github.com/rails-api/active_model_serializers) to handle data serialization
 
 ## Usage
