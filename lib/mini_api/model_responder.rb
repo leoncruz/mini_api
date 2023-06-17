@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'api_responder/serialization'
+require 'mini_api/serialization'
 
-module ApiResponder
+module MiniApi
   # class to handle json render of ActiveRecord::Base instances and ActiveModel::Model's
   class ModelResponder
     include Serialization
@@ -52,7 +52,7 @@ module ApiResponder
 
       I18n.t(
         kind,
-        scope: [:api_responder, :messages, :actions, @controller.action_name],
+        scope: [:mini_api, :messages, :actions, @controller.action_name],
         resource_name: @resource.class.model_name.human,
         default: ''
       )

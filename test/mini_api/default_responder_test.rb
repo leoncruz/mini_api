@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class DefaultController < ActionController::Base
-  include ApiResponder
+  include MiniApi
 
   def index
     render_json [1, 2, :symbol, 'House']

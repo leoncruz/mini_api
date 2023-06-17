@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class DummyRecordsController < ActionController::Base
-  include ApiResponder
+  include MiniApi
 
   def index
     dummies = DummyRecord.all

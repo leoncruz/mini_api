@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'api_responder/model_responder_test'
+require 'mini_api/model_responder_test'
 
 class SuccessOperationsTest < ModelResponderTest
   test 'should return active record instance when there is no model errors' do

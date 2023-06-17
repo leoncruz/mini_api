@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    api_responder (0.1.0)
+    mini_api (0.1.0)
       rails (>= 7.0.5)
 
 GEM
@@ -217,9 +217,9 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
-  api_responder!
   debug (>= 1.0.0)
   kaminari
+  mini_api!
   puma
   rubocop
   rubocop-minitest

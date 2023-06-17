@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'api_responder/exceptions/kaminari_not_installed'
-require 'api_responder/serialization'
+require 'mini_api/exceptions/kaminari_not_installed'
+require 'mini_api/serialization'
 
-module ApiResponder
+module MiniApi
   class RelationResponder
     include Serialization
 

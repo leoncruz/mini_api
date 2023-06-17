@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ApiResponder
+module MiniApi
   class DefaultResponder
     def initialize(controller, resource, options = {})
       @controller = controller

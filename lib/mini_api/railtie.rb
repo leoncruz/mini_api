@@ -2,9 +2,9 @@
 
 require 'active_support/i18n'
 
-module ApiResponder
+module MiniApi
   class Railtie < ::Rails::Railtie
     # load translations
-    I18n.load_path << File.expand_path('../api_responder/locales/en.yml', __dir__)
+    I18n.load_path << File.expand_path('../mini_api/locales/en.yml', __dir__)
   end
 end

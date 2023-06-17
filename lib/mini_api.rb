@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'api_responder/railtie'
-require 'api_responder/responder'
+require 'mini_api/railtie'
+require 'mini_api/responder'
 
 # Entrypoint module
-module ApiResponder
+module MiniApi
   def render_json(resource, options = {})
     responder = Responder.new(self, resource, options)
 

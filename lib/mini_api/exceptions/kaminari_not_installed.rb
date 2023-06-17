@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module ApiResponder
+module MiniApi
   class KaminariNotInstalled < StandardError; end
 end

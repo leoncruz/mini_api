@@ -4,7 +4,7 @@ ENV["RAILS_ENV"] = "test"
 require 'simplecov'
 
 SimpleCov.start 'rails' do
-  add_filter 'lib/api_responder/version.rb'
+  add_filter 'lib/mini_api/version.rb'
 end
 
 require_relative "../test/dummy/config/environment"

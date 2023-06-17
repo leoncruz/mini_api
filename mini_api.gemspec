@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/api_responder/version'
+require_relative 'lib/mini_api/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = 'api_responder'
-  spec.version     = ApiResponder::VERSION
+  spec.name        = 'mini_api'
+  spec.version     = MiniApi::VERSION
   spec.authors     = ['Leon Cruz']
   spec.email       = ['leon.cruz.teixeira@gmail.com']
   spec.summary     = 'A collection of resources to create restful apis'

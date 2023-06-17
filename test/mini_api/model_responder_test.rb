@@ -7,7 +7,7 @@ class DummyModel
 end
 
 class DummyRecordsController < ActionController::Base
-  include ApiResponder
+  include MiniApi
 
   def create
     dummy_params = { first_name: params[:first_name], last_name: params[:last_name] }

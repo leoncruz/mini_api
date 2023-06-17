@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ec2939be693459b7ce4d/maintainability)](https://codeclimate.com/github/leoncruz/api-responder/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ec2939be693459b7ce4d/test_coverage)](https://codeclimate.com/github/leoncruz/api-responder/test_coverage)
 
-# Api Responder
+# Mini Api
 A gem to standardize json responses in Rails applications, highly inspired on [Responders](https:github.com/heartcombo/responders)
 
 ## Table of Contents
@@ -17,7 +17,7 @@ A gem to standardize json responses in Rails applications, highly inspired on [R
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "api_responder"
+gem "mini_api"
 ```
 
 And then execute:
@@ -30,10 +30,10 @@ and [Active Model Serializers](http://github.com/rails-api/active_model_serializ
 
 ## Usage
 
-After install the gem, include the `ApiResponder` module into your `ApplicationController` or other parent controller
+After install the gem, include the `MiniApi` module into your `ApplicationController` or other parent controller
 ```ruby
 class ApplicationController < ActionController::Base
-  include ApiResponder
+  include MiniApi
 end
 ```
 
@@ -104,7 +104,7 @@ class UsersController < ApplicationController
   end
 end
 ```
-But, with `ApiResponder`, you could simplify the action doing like:
+But, with `mini_api`, you could simplify the action doing like:
 ```ruby
 class UsersController < ApplicationController
   def new

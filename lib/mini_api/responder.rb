@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'api_responder/default_responder'
-require 'api_responder/model_responder'
-require 'api_responder/relation_responder'
+require 'mini_api/default_responder'
+require 'mini_api/model_responder'
+require 'mini_api/relation_responder'
 
-module ApiResponder
+module MiniApi
   class Responder
     def initialize(controller, resource, options = {})
       @controller = controller

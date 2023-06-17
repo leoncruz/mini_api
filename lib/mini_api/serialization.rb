@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ApiResponder
+module MiniApi
   #
   # This module is responsible to handler integration with Active Model Serialier gem
   # call the +get_serializer+ method of controller implemented by gem
