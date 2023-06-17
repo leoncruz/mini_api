@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'api_responder/serialization'
+
 module ApiResponder
   # class to handle json render of ActiveRecord::Base instances and ActiveModel::Model's
   class ModelResponder
+    include Serialization
+
     def initialize(controller, resource, options = {})
       @controller = controller
       @resource = resource
@@ -19,7 +23,7 @@ module ApiResponder
         if resource_has_errors?
           { errors: @resource.errors.messages }.merge(body)
         else
-          { data: @resource }.merge(body)
+          { data: serialiable_body(@resource) }.merge(body)
         end
 
       @controller.render json: body, status: status_code
