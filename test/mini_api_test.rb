@@ -45,22 +45,22 @@ class MiniApiTest < ActionDispatch::IntegrationTest
   end
 
   test 'should transform keys to camelLower when configured' do
-    MiniApi::Config.transform_keys_to = :camel_lower
+    MiniApi::Config.transform_params_keys_to = :camel_lower
 
     get '/new', params: { 'first_name' => 'Dummy', 'last_name' => 'Model' }
 
     assert_response :ok
 
-    MiniApi::Config.transform_keys_to = :snake_case
+    MiniApi::Config.transform_params_keys_to = :snake_case
   end
 
   test 'should transform keys to CamelCase when informed' do
-    MiniApi::Config.transform_keys_to = :camel_case
+    MiniApi::Config.transform_params_keys_to = :camel_case
 
     get '/new', params: { 'first_name' => 'Dummy', 'last_name' => 'Model' }
 
     assert_response :ok
 
-    MiniApi::Config.transform_keys_to = :snake_case
+    MiniApi::Config.transform_params_keys_to = :snake_case
   end
 end

@@ -14,7 +14,8 @@ module MiniApi
     before_action :transform_params
 
     def transform_params
-      self.params = ActionController::Parameters.new(CaseTransform.transform(request.parameters))
+      self.params =
+        ActionController::Parameters.new(CaseTransform.request_params_keys(request.parameters))
     end
   end
 
