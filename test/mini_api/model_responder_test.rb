@@ -2,10 +2,6 @@
 
 require 'test_helper'
 
-class DummyModel
-  include ActiveModel::Model
-end
-
 class DummyRecordsController < ActionController::Base
   include MiniApi
 
