@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'mini_api/serialization'
+require 'mini_api/case_transform'
 
 module MiniApi
   # class to handle json render of ActiveRecord::Base instances and ActiveModel::Model's
@@ -29,6 +30,8 @@ module MiniApi
       # This is for an problem with ActiveModelSerializer that adds an error
       # attribute when resource is an ActiveModel instance
       body[:data] = body[:data].except('errors') if body[:data]&.key?('errors')
+
+      body = CaseTransform.response_keys(body)
 
       @controller.render json: body, status: status_code
     end

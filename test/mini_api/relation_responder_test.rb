@@ -128,4 +128,34 @@ class RelationResponder < ActionDispatch::IntegrationTest
 
     assert_equal 25, response.parsed_body['data'].size
   end
+
+  test 'should return keys as camel_lower when configured' do
+    MiniApi::Config.transform_response_keys_to = :camel_lower
+
+    1.upto(25) { |n| DummyRecord.create(first_name: "Dummy #{n}", last_name: "Record #{n}") }
+
+    get '/dummies'
+
+    assert_response :ok
+
+    response.parsed_body['data'].each do |dummy|
+      assert_equal %w[id firstName lastName], dummy.keys
+    end
+
+    MiniApi::Config.transform_response_keys_to = :snake_case
+  end
+
+  test 'should return metadata keys as camel_lower when configured' do
+    MiniApi::Config.transform_response_keys_to = :camel_lower
+
+    DummyRecord.create(first_name: 'Dummy', last_name: 'Record')
+
+    get '/dummies'
+
+    assert_response :ok
+
+    assert_equal %w[currentPage nextPage prevPage totalPages totalRecords], response.parsed_body['meta'].keys
+
+    MiniApi::Config.transform_response_keys_to = :snake_case
+  end
 end

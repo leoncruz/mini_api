@@ -61,4 +61,16 @@ class SuccessOperationsTest < ModelResponderTest
 
     assert_empty response.parsed_body
   end
+
+  test 'should active record instance with camel lower keys when configured' do
+    MiniApi::Config.transform_response_keys_to = :camel_lower
+
+    post '/dummy', params: { first_name: 'Dummy', last_name: 'Record' }
+
+    expected_keys = %w[id firstName lastName]
+
+    assert_equal response.parsed_body['data'].keys, expected_keys
+
+    MiniApi::Config.transform_response_keys_to = :snake_case
+  end
 end

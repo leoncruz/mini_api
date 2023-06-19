@@ -9,6 +9,7 @@ A gem to standardize json responses in Rails applications, highly inspired on [R
 - [Usage](#usage)
   - [Respondering json](#respondering-json)
   - [Success and failure actions](#success-and-failure-actions)
+  - [Transform keys](#transform-keys)
 - [Overriding response](#overriding-response)
 - [Pagination](#pagination)
 - [Contributing](#contributing)
@@ -140,6 +141,20 @@ witht `status_code` 422
 The `message` key is different based on actions on informed model: create, update, and destroy
 
 You can respond any type of data, but ActiveRecord/ActiveModel::Model and ActiveRecord::Relation has a special treatment as shown above
+
+### Transform keys
+
+It is possible to transform the keys of request and response. By default, will transform to `snake_case`, but the possible values are `snake_case`, `camel_lower` and `camel_case`
+
+To change the transform operation, simply adds a initializer on initilizations folder with content:
+```ruby
+MiniApi::Config.configure do |config|
+  config.transform_params_keys_to = :snake_case
+  config.transform_response_keys_to = :camel_lower
+end
+```
+The option `transform_params_keys_to` will transform request params.
+The option `transform_response_keys_to` will transform responses.
 
 ## Overriding response
 
