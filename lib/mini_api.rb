@@ -2,6 +2,7 @@
 
 require 'mini_api/railtie'
 require 'mini_api/responder'
+require 'mini_api/case_transform'
 
 # Entrypoint module
 module MiniApi
