@@ -10,7 +10,7 @@ class DefaultController < ActionController::Base
   end
 
   def show
-    render_json({ code: 441 }, message: 'could not be resolved')
+    render_json({ code: 441, other_message: 42 }, message: 'could not be resolved')
   end
 end
 
@@ -65,7 +65,7 @@ class DefaultResponderTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
 
-    assert_equal({ 'code' => 441 }, response.parsed_body['data'])
+    assert_equal({ 'code' => 441, 'other_message' => 42 }, response.parsed_body['data'])
   end
 
   test 'should return custom message if informed' do
@@ -88,5 +88,15 @@ class DefaultResponderTest < ActionDispatch::IntegrationTest
     get '/custom_status'
 
     assert_response :not_found
+  end
+
+  test 'should response keys as camel lower when configure' do
+    MiniApi::Config.transform_response_keys_to = :camel_lower
+
+    get '/show'
+
+    assert_equal({ 'code' => 441, 'otherMessage' => 42 }, response.parsed_body['data'])
+
+    MiniApi::Config.transform_response_keys_to = :snake_case
   end
 end
