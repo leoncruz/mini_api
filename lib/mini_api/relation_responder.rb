@@ -2,6 +2,7 @@
 
 require 'mini_api/exceptions/kaminari_not_installed'
 require 'mini_api/serialization'
+require 'mini_api/case_transform'
 
 module MiniApi
   class RelationResponder
@@ -15,6 +16,10 @@ module MiniApi
 
     def respond
       meta, collection = extract_meta_and_collection
+
+      meta = CaseTransform.response_keys(meta)
+
+      collection = transform_case(collection.as_json)
 
       @controller.render json: {
         success: @options[:success] || true,
@@ -38,6 +43,10 @@ module MiniApi
         },
         serialiable_body(collection)
       ]
+    end
+
+    def transform_case(collection)
+      collection.map { |item| CaseTransform.response_keys(item) }
     end
 
     def transform_resource_to_collection

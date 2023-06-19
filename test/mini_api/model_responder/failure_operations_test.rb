@@ -76,4 +76,19 @@ class FailureOperationsTest < ModelResponderTest
 
     assert_not response.parsed_body['success']
   end
+
+  test 'should active record errors with camel lower keys when configured' do
+    MiniApi::Config.transform_response_keys_to = :camel_lower
+
+    post '/dummy', params: { first_name: '', last_name: '' }
+
+    errors = {
+      'firstName' => ["can't be blank"],
+      'lastName' => ["can't be blank"]
+    }
+
+    assert_equal response.parsed_body['errors'], errors
+
+    MiniApi::Config.transform_response_keys_to = :snake_case
+  end
 end

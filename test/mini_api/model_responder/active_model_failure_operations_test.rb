@@ -55,4 +55,23 @@ class ActiveModelFailureOperationsTest < ModelResponderTest
 
     assert_equal response.parsed_body['errors'], errors
   end
+
+  test 'should return active model errors as camel lower when configured' do
+    MiniApi::Config.transform_response_keys_to = :camel_lower
+
+    post '/create', params: { first_name: 'Dummy', last_name: 'Model' }
+
+    assert_response :unprocessable_entity
+
+    refute response.parsed_body['success']
+
+    errors = {
+      firstName: ['is invalid'],
+      lastName: ['is invalid']
+    }.stringify_keys
+
+    assert_equal response.parsed_body['errors'], errors
+
+    MiniApi::Config.transform_response_keys_to = :snake_case
+  end
 end

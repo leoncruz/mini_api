@@ -46,4 +46,23 @@ class ActiveModelSuccessOperationsTest < ModelResponderTest
 
     assert response.parsed_body['success']
   end
+
+  test 'should return model attributes as camel lower when configured' do
+    MiniApi::Config.transform_response_keys_to = :camel_lower
+
+    get '/'
+
+    assert_response :ok
+
+    data = {
+      firstName: 'Dummy',
+      lastName: 'Model'
+    }.stringify_keys
+
+    assert_equal response.parsed_body['data'], data
+
+    assert response.parsed_body['success']
+
+    MiniApi::Config.transform_response_keys_to = :snake_case
+  end
 end
