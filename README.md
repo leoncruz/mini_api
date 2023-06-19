@@ -3,7 +3,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ec2939be693459b7ce4d/test_coverage)](https://codeclimate.com/github/leoncruz/api-responder/test_coverage)
 
 # Mini Api
-A gem to standardize json responses in Rails applications, highly inspired on [Responders](https:github.com/heartcombo/responders)
+A gem to standardize json responses in Rails applications, highly inspired on [Responders](https://github.com/heartcombo/responders)
 
 ## Table of Contents
 - [Usage](#usage)
