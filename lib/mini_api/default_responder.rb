@@ -15,11 +15,18 @@ module MiniApi
 
       data = transform_keys
 
+      body =
+        if success
+          { data: data }
+        else
+          { errors: data }
+        end
+
       @controller.render(
         json: {
           success: success,
-          data: data,
-          message: @options[:message] || nil
+          message: @options[:message] || nil,
+          **body
         },
         status: @options[:status] || :ok
       )

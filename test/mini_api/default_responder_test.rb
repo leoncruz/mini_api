@@ -12,6 +12,10 @@ class DefaultController < ActionController::Base
   def show
     render_json({ code: 441, other_message: 42 }, message: 'could not be resolved')
   end
+
+  def show_with_error
+    render_json({ code: 441 }, success: false)
+  end
 end
 
 class DefaultResponderTest < ActionDispatch::IntegrationTest
@@ -21,6 +25,7 @@ class DefaultResponderTest < ActionDispatch::IntegrationTest
     Rails.application.routes.draw do
       get '/', to: 'default#index'
       get '/show', to: 'default#show'
+      get '/show_with_error', to: 'default#show_with_error'
     end
   end
 
@@ -98,5 +103,13 @@ class DefaultResponderTest < ActionDispatch::IntegrationTest
     assert_equal({ 'code' => 441, 'otherMessage' => 42 }, response.parsed_body['data'])
 
     MiniApi::Config.transform_response_keys_to = :snake_case
+  end
+
+  test 'should return errors instead data key when success is false' do
+    get '/show_with_error'
+
+    assert response.parsed_body['errors']
+
+    refute response.parsed_body['data']
   end
 end
