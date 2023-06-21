@@ -12,5 +12,11 @@ module MiniApi
 
       @controller.get_serializer(resource)
     end
+
+    def get_error_serializer(resource)
+      serializer_class = @controller.get_serializer(resource)
+
+      "#{serializer_class.serializer}::Error".safe_constantize
+    end
   end
 end
