@@ -65,12 +65,23 @@ module MiniApi
     def default_message
       kind = resource_has_errors? ? 'alert' : 'notice'
 
-      I18n.t(
-        kind,
-        scope: [:mini_api, :messages, :actions, @controller.action_name],
-        resource_name: @resource.class.model_name.human,
-        default: ''
-      )
+      model_path = "mini_api.messages.#{@resource.model_name.i18n_key}"
+
+      if I18n.exists? model_path
+        I18n.t(
+          kind,
+          scope: "#{model_path}.#{@controller.action_name}",
+          resource_name: @resource.class.model_name.human,
+          default: ''
+        )
+      else
+        I18n.t(
+          kind,
+          scope: [:mini_api, :messages, :actions, @controller.action_name],
+          resource_name: @resource.class.model_name.human,
+          default: ''
+        )
+      end
     end
 
     def previously_new_record?
