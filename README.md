@@ -180,9 +180,13 @@ You can create serializers for non `ActiveRecord` and add a nested `Error` class
 
 ### Message
 
-The `I18n` path for the key `message` is `mini_api.messages.actions` and the controller action name
+The `I18n` path for the key `message` is `mini_api.messages.actions`, the controller action name and the `notice` for success actions
+or `alert` for failure actions. Example `mini_api.messages.actions.create.notice`
 
 By default support the actions: `create`, `update` and `delete`, but you can add more actions to translate
+
+You can add translation based on models, changing the `action` key for your model name. Example:
+`mini_api.messages.model_name.create.alert`. With this, is more easy personalize messages
 
 ### Transform keys
 

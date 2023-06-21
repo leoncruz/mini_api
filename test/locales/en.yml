@@ -12,6 +12,18 @@ en:
           notice: '%{resource_name} was successfully destroyed.'
           alert: '%{resource_name} could not be destroyed.'
 
+      dummy_custom_translation:
+        create:
+          notice: 'was created!'
+          alert: 'something was wrong!'
+
+      nested_module/dummy_custom_translation:
+        update:
+          notice: 'nested! was created!'
+          alert: 'nested! something was wrong!'
+
+
   activerecord:
     models:
       dummy_record: Dummy Record Translated
+      dummy_custom_translation: Dummy Custom Translation
