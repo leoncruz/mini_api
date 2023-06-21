@@ -10,6 +10,7 @@ A gem to standardize json responses in Rails applications, highly inspired on [R
   - [Respondering json](#respondering-json)
   - [Success and failure actions](#success-and-failure-actions)
   - [Errors](#errors)
+  - [Message](#message)
   - [Transform keys](#transform-keys)
 - [Overriding response](#overriding-response)
 - [Pagination](#pagination)
@@ -176,6 +177,12 @@ The response will be like:
 }
 ```
 You can create serializers for non `ActiveRecord` and add a nested `Error` class too
+
+### Message
+
+The `I18n` path for the key `message` is `mini_api.messages.actions` and the controller action name
+
+By default support the actions: `create`, `update` and `delete`, but you can add more actions to translate
 
 ### Transform keys
 
