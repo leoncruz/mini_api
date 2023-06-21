@@ -9,6 +9,7 @@ A gem to standardize json responses in Rails applications, highly inspired on [R
 - [Usage](#usage)
   - [Respondering json](#respondering-json)
   - [Success and failure actions](#success-and-failure-actions)
+  - [Errors](#errors)
   - [Transform keys](#transform-keys)
 - [Overriding response](#overriding-response)
 - [Pagination](#pagination)
@@ -141,6 +142,40 @@ witht `status_code` 422
 The `message` key is different based on actions on informed model: create, update, and destroy
 
 You can respond any type of data, but ActiveRecord/ActiveModel::Model and ActiveRecord::Relation has a special treatment as shown above
+
+### Errors
+To show errors of a model, by default will use the `errors.messages` method, but `MiniApi` adds an ability to `active_model_serializers` to create a error serializer
+as a nested class in your serializer. Example:
+```ruby
+class UserSerializer < ActiveModel::Serializer
+  attributes :id, :first_name, :last_name
+
+  class Error < ActiveModel::Serializer
+    attributes :user
+
+    def user
+      {
+        first_name: object.errors[:first_name],
+        last_name: object.errors[:last_name],
+      }
+    end
+  end
+end
+```
+The response will be like:
+```json
+{
+  "success": false,
+  "errors": {
+    "user": {
+      "first_name": "can't be blank",
+      "last_name": "can't be blank"
+    }
+  },
+  "message": "User could not be created."
+}
+```
+You can create serializers for non `ActiveRecord` and add a nested `Error` class too
 
 ### Transform keys
 

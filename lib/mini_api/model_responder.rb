@@ -22,7 +22,7 @@ module MiniApi
 
       body =
         if resource_has_errors?
-          { errors: @resource.errors.messages }.merge(body)
+          errors.merge(body)
         else
           { data: serialiable_body(@resource).as_json }.merge(body)
         end
@@ -40,6 +40,14 @@ module MiniApi
 
     def resource_has_errors?
       !@resource.errors.empty?
+    end
+
+    def errors
+      error_serializer = get_error_serializer(@resource)
+
+      return { errors: @resource.errors.messages } unless error_serializer
+
+      { errors: error_serializer.new(@resource).as_json }
     end
 
     def status_code
