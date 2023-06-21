@@ -27,7 +27,7 @@ jobs:
       - name: Running tests
         uses: paambaati/codeclimate-action@v4.0.0
         env:
-          CC_TEST_REPORTER_ID: 747d63fc771e9c7bade64cce52fce297415adad9904a7523691ed934201723aa
+          CC_TEST_REPORTER_ID: 5c1f1e8b5833596f0e9fb4a56d61a186d0a4cd2289f2224effdba5a3a8d22015
         with:
           debug: true
           coverageCommand: bin/test
