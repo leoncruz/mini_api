@@ -18,7 +18,9 @@ class DummiesController < ActionController::Base
   end
 end
 
-class DummySerializer < ActiveModel::Serializer
+class DummyRecordResource
+  include Alba::Resource
+
   attributes :id, :first_name, :last_name
 end
 
@@ -34,17 +36,21 @@ class SerializationTest < ActionDispatch::IntegrationTest
     end
 
     Rails.application.routes.disable_clear_and_finalize = true
-
-    Rails.application.routes.draw do
-      get '/', to: 'dummies#index'
-      get '/show', to: 'dummies#show'
-    end
   end
 
   teardown do
     ActiveRecord::Base.connection.drop_table(:dummy_records, if_exists: true)
 
     Rails.application.reload_routes!
+  end
+end
+
+class BasicControllerAndResource < SerializationTest
+  setup do
+    Rails.application.routes.draw do
+      get '/', to: 'dummies#index'
+      get '/show', to: 'dummies#show'
+    end
   end
 
   test 'should use serializer when avaliable to render collections' do
@@ -80,5 +86,95 @@ class SerializationTest < ActionDispatch::IntegrationTest
     }.stringify_keys
 
     assert_equal dummy, response.parsed_body['data']
+  end
+end
+
+module Api
+  module V1
+    class DummiesController < ActionController::Base
+      include MiniApi
+
+      def index
+        dummies = DummyRecord.all
+
+        render_json dummies
+      end
+    end
+
+    class DummyRecordResource
+      include Alba::Resource
+
+      attributes :last_name
+    end
+
+    class NestedControllerAndResource < ::SerializationTest
+      setup do
+        Rails.application.routes.draw do
+          namespace :api do
+            namespace :v1 do
+              get '/dummies', to: 'dummies#index'
+            end
+          end
+        end
+      end
+
+      test 'should use nested serializer for nested controller' do
+        get '/api/v1/dummies'
+
+        assert_response :ok
+
+        data = [
+          { 'last_name' => DummyRecord.first.last_name },
+          { 'last_name' => DummyRecord.last.last_name }
+        ]
+
+        assert_equal response.parsed_body['data'], data
+      end
+    end
+  end
+end
+
+module Different
+  class DummyRecordResource
+    include Alba::Resource
+
+    attributes :first_name
+  end
+
+  module Scope
+    class DummiesController < ActionController::Base
+      include MiniApi
+
+      def index
+        dummies = DummyRecord.all
+
+        render_json dummies
+      end
+    end
+
+    class DifferentScope < SerializationTest
+      setup do
+        Rails.application.routes.draw do
+          namespace :different do
+            namespace :scope do
+              get '/dummies', to: 'dummies#index'
+            end
+          end
+        end
+      end
+
+      test 'should find resource when controller is in different module tree' do
+        get '/different/scope/dummies'
+
+        assert_response :ok
+
+        data = [
+          { 'first_name' => DummyRecord.first.first_name },
+          { 'first_name' => DummyRecord.last.first_name }
+        ]
+
+        assert_equal response.parsed_body['data'], data
+      end
+    end
   end
 end

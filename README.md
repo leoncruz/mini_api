@@ -8,6 +8,7 @@ A gem to standardize json responses in Rails applications, highly inspired on [R
 ## Table of Contents
 - [Usage](#usage)
   - [Respondering json](#respondering-json)
+  - [Data Serialization](#data-serialization)
   - [Success and failure actions](#success-and-failure-actions)
   - [Errors](#errors)
   - [Message](#message)
@@ -30,7 +31,6 @@ $ bundle
 ```
 
 You must install [Kaminari](https://github.com/kaminari/kaminari) to handle pagination
-and [Active Model Serializers](http://github.com/rails-api/active_model_serializers) to handle data serialization
 
 ## Usage
 
@@ -92,6 +92,22 @@ The response will be like:
 }
 ```
 
+### Data Serialization
+
+This gem is integrated to [Alba](https://github.com/okuramasafumi/Alba) to create your `resources`. A simple resource example:
+```ruby
+class UserResource
+  include Alba::Resource
+
+  attributes :id, :name, :email
+end
+```
+When the `render_json` methods receive an instance of `user` or a `ActiveRecord::Relation` of `users` will search by `UserResource`.
+
+If you have a nested controller like: `Api::V1::UsersController`, `mini_api` will search by resources in controller namespace.
+First will search per `Api::V1::UserResource`, after `Api::UserResource` and then `UserResource` until find.
+That way, even if your `controller` and `resource` are defined in different namespace levels, `MiniApi` will find.
+
 ### Success and failure actions
 
 Many times, our controller actions need to persist or validate some data coming from request, the default approach to do that is like:
@@ -145,20 +161,20 @@ The `message` key is different based on actions on informed model: create, updat
 You can respond any type of data, but ActiveRecord/ActiveModel::Model and ActiveRecord::Relation has a special treatment as shown above
 
 ### Errors
-To show errors of a model, by default will use the `errors.messages` method, but `MiniApi` adds an ability to `active_model_serializers` to create a error serializer
-as a nested class in your serializer. Example:
+To show errors of a model, by default will use the `errors.messages` method, but `MiniApi` adds an ability to `Alba` to create a error resource
+as a nested class in your resource. Example:
+
 ```ruby
-class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name
+class UserResource
+  include Alba::Resource
 
-  class Error < ActiveModel::Serializer
-    attributes :user
+  attributes :id, :name, :email
 
-    def user
-      {
-        first_name: object.errors[:first_name],
-        last_name: object.errors[:last_name],
-      }
+  class Error
+    include Alba::Resource
+
+    attribute :user do
+      object.errors.full_messages
     end
   end
 end
@@ -168,10 +184,7 @@ The response will be like:
 {
   "success": false,
   "errors": {
-    "user": {
-      "first_name": "can't be blank",
-      "last_name": "can't be blank"
-    }
+    "user": ["First name can't be blank"]
   },
   "message": "User could not be created."
 }

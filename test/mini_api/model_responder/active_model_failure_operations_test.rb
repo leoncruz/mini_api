@@ -14,7 +14,9 @@ class DummyModel
   end
 end
 
-class DummyModelSerializer < ActiveModelSerializers::Model
+class DummyModelResource
+  include Alba::Resource
+
   attributes :first_name, :last_name
 end
 
