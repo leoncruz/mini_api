@@ -1,6 +1,6 @@
 ![](https://github.com/leoncruz/api-responder/actions/workflows/tests.yml/badge.svg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ec2939be693459b7ce4d/maintainability)](https://codeclimate.com/github/leoncruz/api-responder/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ec2939be693459b7ce4d/test_coverage)](https://codeclimate.com/github/leoncruz/api-responder/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6ed70a7ed0d28e32b56c/maintainability)](https://codeclimate.com/github/leoncruz/mini_api/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/6ed70a7ed0d28e32b56c/test_coverage)](https://codeclimate.com/github/leoncruz/mini_api/test_coverage)
 
 # Mini Api
 A gem to standardize json responses in Rails applications, highly inspired on [Responders](https://github.com/heartcombo/responders)
