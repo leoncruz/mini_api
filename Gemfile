@@ -17,3 +17,5 @@ gem 'rubocop-performance'
 gem 'simplecov'
 
 gem 'kaminari'
+
+gem 'alba'
