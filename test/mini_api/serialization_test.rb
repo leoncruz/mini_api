@@ -18,7 +18,7 @@ class DummiesController < ActionController::Base
   end
 end
 
-class DummySerializer < ActiveModel::Serializer
+class DummySerializer
   attributes :id, :first_name, :last_name
 end
 

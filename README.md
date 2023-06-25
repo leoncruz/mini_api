@@ -30,7 +30,6 @@ $ bundle
 ```
 
 You must install [Kaminari](https://github.com/kaminari/kaminari) to handle pagination
-and [Active Model Serializers](http://github.com/rails-api/active_model_serializers) to handle data serialization
 
 ## Usage
 
@@ -148,20 +147,6 @@ You can respond any type of data, but ActiveRecord/ActiveModel::Model and Active
 To show errors of a model, by default will use the `errors.messages` method, but `MiniApi` adds an ability to `active_model_serializers` to create a error serializer
 as a nested class in your serializer. Example:
 ```ruby
-class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name
-
-  class Error < ActiveModel::Serializer
-    attributes :user
-
-    def user
-      {
-        first_name: object.errors[:first_name],
-        last_name: object.errors[:last_name],
-      }
-    end
-  end
-end
 ```
 The response will be like:
 ```json

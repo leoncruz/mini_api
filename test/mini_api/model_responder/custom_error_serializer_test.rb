@@ -9,10 +9,10 @@ module CustomErrorSerializer
     validates :last_name, presence: true
   end
 
-  class DummyRecordSerializer < ActiveModel::Serializer
+  class DummyRecordSerializer
     attributes :first_name, :last_name
 
-    class Error < ActiveModel::Serializer
+    class Error
       attributes :dummy
 
       def dummy

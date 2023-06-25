@@ -14,7 +14,7 @@ class DummyModel
   end
 end
 
-class DummyModelSerializer < ActiveModelSerializers::Model
+class DummyModelSerializer
   attributes :first_name, :last_name
 end
 

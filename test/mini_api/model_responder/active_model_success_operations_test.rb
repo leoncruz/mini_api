@@ -9,7 +9,7 @@ class DummyModel
   attr_accessor :first_name, :last_name
 end
 
-class DummyModelSerializer < ActiveModelSerializers::Model
+class DummyModelSerializer
   attributes :first_name, :last_name
 end
 
