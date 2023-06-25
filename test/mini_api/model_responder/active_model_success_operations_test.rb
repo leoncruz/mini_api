@@ -9,7 +9,9 @@ class DummyModel
   attr_accessor :first_name, :last_name
 end
 
-class DummyModelSerializer
+class DummyModelResource
+  include Alba::Resource
+
   attributes :first_name, :last_name
 end
 
