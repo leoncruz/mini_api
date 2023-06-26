@@ -201,6 +201,9 @@ By default support the actions: `create`, `update` and `delete`, but you can add
 You can add translation based on models, changing the `action` key for your model name. Example:
 `mini_api.messages.model_name.create.alert`. With this, is more easy personalize messages
 
+It is possible define a translation based on controller, useful if you use nested controlers. The path is:
+`min_api.messages.controller_name.action_name.alert`
+
 ### Transform keys
 
 It is possible to transform the keys of request and response. By default, will transform to `snake_case`, but the possible values are `snake_case`, `camel_lower` and `camel_case`
