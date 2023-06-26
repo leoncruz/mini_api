@@ -22,6 +22,12 @@ en:
           notice: 'nested! was created!'
           alert: 'nested! something was wrong!'
 
+      controller:
+        messages:
+          create:
+            notice: 'message controller notice'
+            alert: 'message controller alert'
+
 
   activerecord:
     models:

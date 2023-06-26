@@ -24,10 +24,25 @@ class DummyCustomTranslationsController < ActionController::Base
   end
 end
 
+class MessagesController < ActionController::Base
+  include MiniApi
+
+  def create
+    dummy_params = { first_name: params[:first_name], last_name: params[:last_name] }
+
+    dummy_record = DummyRecord.new(dummy_params)
+
+    dummy_record.save
+
+    render_json dummy_record
+  end
+end
+
 class CustomTranslationMessageTest < ModelResponderTest
   setup do
     Rails.application.routes.draw do
       post '/create', to: 'dummy_custom_translations#create'
+      post '/controller_messages/create', to: 'messages#create'
     end
   end
 
@@ -47,5 +62,15 @@ class CustomTranslationMessageTest < ModelResponderTest
     assert_response :unprocessable_entity
 
     assert_equal 'something was wrong!', response.parsed_body['message']
+  end
+
+  test 'should use controller translations when defined' do
+    post '/controller_messages/create', params: { first_name: 'Dummy', last_name: 'Record' }
+
+    assert_equal 'message controller notice', response.parsed_body['message']
+
+    post '/controller_messages/create', params: {}
+
+    assert_equal 'message controller alert', response.parsed_body['message']
   end
 end
