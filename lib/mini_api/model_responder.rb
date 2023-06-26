@@ -2,11 +2,13 @@
 
 require 'mini_api/serialization'
 require 'mini_api/case_transform'
+require 'mini_api/translation/message'
 
 module MiniApi
   # class to handle json render of ActiveRecord::Base instances and ActiveModel::Model's
   class ModelResponder
     include Serialization
+    include Translation::Message
 
     def initialize(controller, resource, options = {})
       @controller = controller
@@ -17,7 +19,7 @@ module MiniApi
     def respond
       body = {
         success: resource_has_errors? == false,
-        message: @options[:message] || default_message
+        message: @options[:message] || message
       }
 
       body =
@@ -56,28 +58,6 @@ module MiniApi
       return :no_content if destroyed?
 
       :ok
-    end
-
-    def default_message
-      kind = resource_has_errors? ? 'alert' : 'notice'
-
-      model_path = "mini_api.messages.#{@resource.model_name.i18n_key}"
-
-      if I18n.exists? model_path
-        I18n.t(
-          kind,
-          scope: "#{model_path}.#{@controller.action_name}",
-          resource_name: @resource.class.model_name.human,
-          default: ''
-        )
-      else
-        I18n.t(
-          kind,
-          scope: [:mini_api, :messages, :actions, @controller.action_name],
-          resource_name: @resource.class.model_name.human,
-          default: ''
-        )
-      end
     end
 
     def previously_new_record?
