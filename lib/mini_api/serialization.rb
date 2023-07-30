@@ -6,7 +6,8 @@ module MiniApi
   module Serialization
     # This method search by serializer using the module parents of controller.
     # With this, is possible define serializers for the same resource
-    # in different controller scopes
+    # in different controller scopes.
+    # If the resource class does not have a resource, will be use the default `as_json` method
     def serialiable_body(resource)
       controller_scope = @controller.class.module_parents
 
@@ -24,12 +25,14 @@ module MiniApi
 
           break serializer_class if serializer_class
 
-          break DefaultResource if controller_scope.empty?
+          break if controller_scope.empty?
 
           controller_scope.shift
         end
 
-      serializer_class.new(resource)
+      return serializer_class.new(resource) if serializer_class
+
+      resource
     end
 
     # Search by the nested class +Error+ on serializer
@@ -40,11 +43,6 @@ module MiniApi
       return unless error_serializer
 
       "#{error_serializer.class}::Error".safe_constantize
-    end
-
-    # Empty serializer class for when resource does not have a custom class
-    class DefaultResource
-      include Alba::Resource
     end
   end
 end
