@@ -33,7 +33,7 @@ module MiniApi
     #         alert: '%{resource_name} não pôde ser criado.'
 
     module Message
-      def message
+      def i18n_message
         kind = @resource.errors.empty? ? 'notice' : 'alert'
 
         I18n.t(

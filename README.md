@@ -204,6 +204,11 @@ You can add translation based on models, changing the `action` key for your mode
 It is possible define a translation based on controller, useful if you use nested controlers. The path is:
 `min_api.messages.controller_name.action_name.alert`
 
+If you would like to send the message as `null`, has to use the `:empty` symbol, like:
+```ruby
+render_json @object, message: :empty
+```
+
 ### Transform keys
 
 It is possible to transform the keys of request and response. By default, will transform to `snake_case`, but the possible values are `snake_case`, `camel_lower` and `camel_case`

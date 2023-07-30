@@ -19,7 +19,7 @@ module MiniApi
     def respond
       body = {
         success: resource_has_errors? == false,
-        message: @options[:message] || message
+        message: message
       }
 
       body =
@@ -35,6 +35,12 @@ module MiniApi
     end
 
     private
+
+    def message
+      return if @options[:message] == :empty
+
+      @options[:message] || i18n_message
+    end
 
     def resource_has_errors?
       !@resource.errors.empty?
