@@ -36,6 +36,16 @@ class MessagesController < ActionController::Base
 
     render_json dummy_record
   end
+
+  def create_with_nil_message
+    dummy_params = { first_name: params[:first_name], last_name: params[:last_name] }
+
+    dummy = DummyCustomTranslation.new(dummy_params)
+
+    dummy.save
+
+    render_json dummy, message: :empty
+  end
 end
 
 class CustomTranslationMessageTest < ModelResponderTest
@@ -43,6 +53,8 @@ class CustomTranslationMessageTest < ModelResponderTest
     Rails.application.routes.draw do
       post '/create', to: 'dummy_custom_translations#create'
       post '/controller_messages/create', to: 'messages#create'
+
+      post '/controller_messages/create_with_nil_message', to: 'messages#create_with_nil_message'
     end
   end
 
@@ -72,5 +84,11 @@ class CustomTranslationMessageTest < ModelResponderTest
     post '/controller_messages/create', params: {}
 
     assert_equal 'message controller alert', response.parsed_body['message']
+  end
+
+  test 'should return message as nil when is passed as null' do
+    post '/controller_messages/create_with_nil_message'
+
+    assert_nil response.parsed_body['message']
   end
 end
